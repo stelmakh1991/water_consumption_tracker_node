@@ -1,0 +1,17 @@
+# dependencies
+/node_modules
+
+# env
+.env
+
+# Junk
+.vscode
+.DS_Store
+.idea
+
+# packages
+package-lock.json
+yarn.lock
+
+# pullrequests list
+pullrequests-list.txt

@@ -1,0 +1,93 @@
+tags:
+  - Water
+summary: Get water per month
+operationId: month
+description: 'Retrieve water for a specific month. This endpoint requires the user to be logged in.'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - year
+          - month
+        properties:
+          year:
+            type: integer
+            example: 2024
+          month:
+            type: integer
+            example: 10
+responses:
+  '200':
+    description: 'Successfully retrieved water records for a specific month. Returns a status code, a success message and the records details.'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully found water records!'
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    example: '671bb6983b2b0f54b892ced0-2024-10-01'
+                  date:
+                    type: string
+                    example: '1, October'
+                  day:
+                    type: integer
+                    example: 1
+                  dailyNorm:
+                    type: string
+                    example: '3000'
+                  percentage:
+                    type: string
+                    example: '0'
+                  consumptionCount:
+                    type: integer
+                    example: 0
+  '400':
+    description: 'Bad request error. Returns status code and error information.'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: 'BadRequestError'
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Invalid date format'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'
